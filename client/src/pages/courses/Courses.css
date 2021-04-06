@@ -1,0 +1,4 @@
+.coursesPage{
+    display:flex;
+    flex-direction: column;
+}
