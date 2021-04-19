@@ -157,4 +157,8 @@ i span {
 .signup a:hover {
   text-decoration: underline;
 }
+.btnsign{
+  color: #2691d9;
+  margin-top: 10px;
+}
 

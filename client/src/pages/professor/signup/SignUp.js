@@ -1,15 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
-import Errors from "../../../Components/Errors";
+import { Button } from "antd";
 
 import { register, videErrors } from "../../../JS/actions/professor";
-
 
 const SignUp = ({ history }) => {
   const [professor, setProfessor] = useState({});
   const errors = useSelector((state) => state.professorReducer);
-  console.log(`this is the error ${errors}`)
+  console.log(`this is the error ${errors}`);
   const dispatch = useDispatch();
 
   const handleChange = (e) => {
@@ -21,7 +19,87 @@ const SignUp = ({ history }) => {
     };
   }, []);
   return (
-    
+    <div>
+      <div className="bg-img">
+        <div className="content">
+          <header>Login Form</header>
+          <form action="#">
+            <div className="field">
+              <span className="fa fa-user" />
+              <input
+                className="mb-4"
+                type="text"
+                name="name"
+                onChange={handleChange}
+                placeholder="Enter a valid Name"
+              />{" "}
+            </div>
+
+            <div className="field space">
+              <div className="field">
+                <span className="fa fa-user" />
+                <input
+                  className="mb-4"
+                  type="text"
+                  name="lastName"
+                  onChange={handleChange}
+                  placeholder="Enter a valid LastName"
+                />
+              </div>
+            </div>
+
+            <div className="field space">
+              <div className="field">
+                <span className="fa fa-user" />
+                <input
+                  className="mb-4"
+                  type="text"
+                  name="email"
+                  onChange={handleChange}
+                  placeholder="Enter a valid email address"
+                />
+              </div>
+            </div>
+
+            <div className="field space">
+              <span className="fa fa-lock" />
+              <input
+                type="password"
+                name="password"
+                onChange={handleChange}
+                placeholder="Enter password"
+              />
+              <span className="show">SHOW</span>
+            </div>
+            <div className="pass">
+              <a href="#">Forgot Password?</a>
+            </div>
+            <div className="row mb-3 px-3">
+              {" "}
+              <Button
+                style={{ marginTop: 30, marginBottom: 15 }}
+                type="submit"
+                className="btn btn-blue text-center"
+                onClick={(e) => {
+                  e.preventDefault();
+                  dispatch(register(professor, history));
+                }}
+              >
+                SignUp
+              </Button>{" "}
+            </div>
+          </form>
+
+          <div className="signup">Thunks</div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default SignUp;
+
+/*
 <div className="container-fluid px-1 px-md-5 px-lg-1 px-xl-5 py-5 mx-auto">
       <div className="card card0 border-0">
         <div className="row d-flex">
@@ -124,108 +202,11 @@ const SignUp = ({ history }) => {
         </div>
       </div>
     </div>
-  );
-};
-
-
-export default SignUp;
-
-
-
-/*
+ 
 
 
 
     
     
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    <div>
-    <div className="bg-img">
-      <div className="content">
-        <header>Login Form</header>
-        <form action="#">
-          <div className="field">
-            <span className="fa fa-user" />
-            <input
-                className="mb-4"
-                type="text"
-                name="name"
-                onChange={handleChange}
-                placeholder="Enter a valid Name"
-              />{" "}
-          </div>
-
-          <div className="field space">
-            <div className="field">
-              <span className="fa fa-user" />
-              <input
-                className="mb-4"
-                type="text"
-                name="lastName"
-                onChange={handleChange}
-                placeholder="Enter a valid LastName"
-              />
-            </div>
-          </div>
-
-          <div className="field space">
-            <div className="field">
-              <span className="fa fa-user" />
-              <input
-                className="mb-4"
-                type="text"
-                name="email"
-                onChange={handleChange}
-                placeholder="Enter a valid email address"
-              />
-            </div>
-          </div>
-
-          <div className="field space">
-            <span className="fa fa-lock" />
-            <input
-                type="password"
-                name="password"
-                onChange={handleChange}
-                placeholder="Enter password"
-              />
-            <span className="show">SHOW</span>
-          </div>
-          <div className="pass">
-            <a href="#">Forgot Password?</a>
-          </div>
-          <div className="field">
-            <input type="submit" defaultValue="LOGIN" />
-          </div>
-        </form>
-        <div className="login">Or login with</div>
-        <div className="links">
-          <div className="facebook">
-            <i className="fab fa-facebook-f">
-              <span>Facebook</span>
-            </i>
-          </div>
-          <div className="gmail">
-            <i className="fa fa-google">
-              <span>Email</span>
-            </i>
-          </div>
-        </div>
-        <div className="signup">Thunks</div>
-      </div>
-    </div>
-  </div>*/
+   */

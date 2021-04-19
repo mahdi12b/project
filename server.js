@@ -1,4 +1,4 @@
-console.clear()
+console.clear();
 //require
 const express = require("express");
 require("dotenv").config();
@@ -12,9 +12,13 @@ connectDB();
 //json type
 app.use(express.json());
 // router
-app.use('/api/user', require('./routes/student'))/////////////
-app.use('/api/user', require('./routes/professor'))//////////
-app.use('/api/lesson', require('./routes/cours'))//////////
+app.use("/uploads", express.static("uploads"));
+
+app.use("/api/user", require("./routes/student")); /////////////
+app.use("/api/user", require("./routes/professor")); //////////
+app.use("/api/video", require("./routes/video")); //////////
+app.use("/api/subscribe", require("./routes/subscribe")); //////////
+app.use("/api/comment", require("./routes/comment"));
 //create server
 
 const PORT = process.env.PORT;

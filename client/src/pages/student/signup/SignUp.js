@@ -1,19 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
-import Errors from "../../../Components/Errors";
+import { Button } from "antd";
 
 import { register, videErrors } from "../../../JS/actions/student";
 
-
-
-import './SignUp.css'
-
+import "./SignUp.css";
 
 const SignUp = ({ history }) => {
   const [student, setStudent] = useState({});
-  const errors = useSelector((state) => state.studentReducer.errors);//.errors
-  console.log(`this is the error ${errors}`)
+  const errors = useSelector((state) => state.studentReducer.errors); //.errors
+  console.log(`this is the error ${errors}`);
   const dispatch = useDispatch();
 
   const handleChange = (e) => {
@@ -25,7 +21,79 @@ const SignUp = ({ history }) => {
     };
   }, []);
   return (
-    <div className="container-fluid px-1 px-md-5 px-lg-1 px-xl-5 py-5 mx-auto">
+    <div>
+      <div className="bg-img">
+        <div className="content">
+          <header>Login Form</header>
+          <form action="#">
+            <div className="field">
+              <span className="fa fa-user" />
+              <input
+                className="mb-4"
+                type="text"
+                name="name"
+                onChange={handleChange}
+                placeholder="First name"
+              />{" "}
+            </div>
+            <div className="field space">
+              <div className="field">
+                <span className="fa fa-user" />
+                <input
+                  className="mb-4"
+                  type="text"
+                  name="lastName"
+                  onChange={handleChange}
+                  placeholder="LastName"
+                />{" "}
+              </div>
+            </div>
+            <div className="field space">
+              <div className="field">
+                <span className="fa fa-user" />
+                <input
+                  className="mb-4"
+                  type="text"
+                  name="email"
+                  onChange={handleChange}
+                  placeholder="Enter a valid email address"
+                />{" "}
+              </div>
+            </div>
+            <div className="field space">
+              <span className="fa fa-lock" />
+              <input
+                type="password"
+                name="password"
+                onChange={handleChange}
+                placeholder="Enter password"
+              />{" "}
+              <span className="show">SHOW</span>
+            </div>{" "}
+            <Button
+              style={{ marginTop: 30, marginBottom: 15 }}
+              type="submit"
+              className="btn btn-blue text-center"
+              onClick={(e) => {
+                e.preventDefault();
+                dispatch(register(student, history));
+              }}
+            >
+              SignUp
+            </Button>{" "}
+          </form>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default SignUp;
+
+/*
+    
+    
+<div className="container-fluid px-1 px-md-5 px-lg-1 px-xl-5 py-5 mx-auto">
 <div className="card card0 border-0">
   <div className="row d-flex">
     <div className="col-lg-6">
@@ -128,101 +196,91 @@ const SignUp = ({ history }) => {
 </div>
 </div>
 
-  );
-};
-
-export default SignUp;
-
-
-
-
-/*
-
-
 
 
 
  <div>
-    <div className="bg-img">
-      <div className="content">
-        <header>Login Form</header>
-        <form action="#">
-          <div className="field">
-            <span className="fa fa-user" />
-            <input
-                      className="mb-4"
-                      type="text"
-                      name="name"
-                      onChange={handleChange}
-                      placeholder="First name"
-                    />{" "}
-          </div>
-    
-          <div className="field space">
-            <div className="field">
-              <span className="fa fa-user" />
-              <input
-                      className="mb-4"
-                      type="text"
-                      name="lastName"
-                      onChange={handleChange}
-                      placeholder="LastName"
-                    />{" "}
-            </div>
-          </div>
-    
-          <div className="field space">
-            <div className="field">
-              <span className="fa fa-user" />
-              <input
-                      className="mb-4"
-                      type="text"
-                      name="email"
-                      onChange={handleChange}
-                      placeholder="Enter a valid email address"
-                    />{" "}
-            </div>
-          </div>
-    
-          <div className="field space">
-            <span className="fa fa-lock" />
-            <input
-                      type="password"
-                      name="password"
-                      onChange={handleChange}
-                      placeholder="Enter password"
-                    />{" "}
-            <span className="show">SHOW</span>
-          </div>
-          <div className="field">
-        
-                    {" "}
-                    <button
-                      type="submit"
-                      className="btn btn-blue text-center"
-                      onClick={() => dispatch(register(student, history))}
-                    >
-                      SignUp
-                    </button>{" "}
-                  
-                  
-          </div>
-        </form>
-        
-        <div className="login">Or login with</div>
-        <div className="links">
-          <div className="facebook">
-            <i className="fab fa-facebook-f">
-              <span>Facebook</span>
-            </i>
-          </div>
-          <div className="gmail">
-            <i className="fa fa-google">
-              <span>Google</span>
-            </i>
-          </div>
-        </div>
-        <div className="signup">Thunks</div>
-      </div>
-    </div>
-    </div>   */
+ <div className="bg-img">
+   <div className="content">
+     <header>Login Form</header>
+     <form action="#">
+       <div className="field">
+         <span className="fa fa-user" />
+         <input
+                   className="mb-4"
+                   type="text"
+                   name="name"
+                   onChange={handleChange}
+                   placeholder="First name"
+                 />{" "}
+       </div>
+ 
+       <div className="field space">
+         <div className="field">
+           <span className="fa fa-user" />
+           <input
+                   className="mb-4"
+                   type="text"
+                   name="lastName"
+                   onChange={handleChange}
+                   placeholder="LastName"
+                 />{" "}
+         </div>
+       </div>
+ 
+       <div className="field space">
+         <div className="field">
+           <span className="fa fa-user" />
+           <input
+                   className="mb-4"
+                   type="text"
+                   name="email"
+                   onChange={handleChange}
+                   placeholder="Enter a valid email address"
+                 />{" "}
+         </div>
+       </div>
+ 
+       <div className="field space">
+         <span className="fa fa-lock" />
+         <input
+                   type="password"
+                   name="password"
+                   onChange={handleChange}
+                   placeholder="Enter password"
+                 />{" "}
+         <span className="show">SHOW</span>
+       </div>
+       
+     
+                 {" "}
+                 <button
+                   type="submit"
+                   className="btn btn-blue text-center"
+                   onClick={() => dispatch(register(student, history))}
+                 >
+                   SignUp
+                 </button>{" "}
+               
+               
+       
+     </form>
+     
+     <div className="login">Or login with</div>
+     <div className="links">
+       <div className="facebook">
+         <i className="fab fa-facebook-f">
+           <span>Facebook</span>
+         </i>
+       </div>
+       <div className="gmail">
+         <i className="fa fa-google">
+           <span>Google</span>
+         </i>
+       </div>
+     </div>
+     <div className="signup">Thunks</div>
+   </div>
+ </div>
+ </div> 
+*/

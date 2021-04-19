@@ -1,12 +1,25 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
+import ProfCourses from "../../../Components/profCourses/ProfCourses";
+import axios from "axios";
 
-import './Profile.css'
-
+import "./Profile.css";
 
 const Profile = () => {
   const professor = useSelector((state) => state.professorReducer.professor);
-  console.log(professor)
+
+  const [Videos, setVideos] = useState([]);
+
+  useEffect(() => {
+    axios.get("/api/video/getVideos").then((response) => {
+      if (response.data.success) {
+        console.log(response.data.videos);
+        setVideos(response.data.videos);
+      } else {
+        alert("Failed to get videos");
+      }
+    });
+  }, []);
 
   return (
     <div className="container profile">
@@ -23,8 +36,13 @@ const Profile = () => {
                   width={150}
                 />
                 <div className="mt-3">
-                  <h4>{professor && professor.name}</h4>
-                  <p className="text-secondary mb-1">Full Stack Developer</p>
+                  .<h4>{professor && professor.name}</h4>
+                  {/*Videos &&
+                    Videos.filter(
+                      (video) => video.professor_id === professor._id
+                    ).map((video) => {
+                      <ProfCourses key={video._id} video={video} />;
+                    })*/}
                   <p className="text-muted font-size-sm">Uknown</p>
                   <button className="btn btn-primary">Follow</button>
                   <button className="btn btn-outline-primary">Message</button>

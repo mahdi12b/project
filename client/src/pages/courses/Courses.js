@@ -1,15 +1,12 @@
-import React,{useState} from 'react'
-import CourseList from '../../Components/coursesList/CoursesList'
-import Search from '../../Components/search/Search'
+import React from "react";
+import CourseList from "../../Components/coursesList/CoursesList";
 
 const Courses = () => {
-    const [search , setSearch] = useState('');
-    return (
-        <div className='coursesPage' >
-            <Search className='search' setSearch={setSearch} />
-            <CourseList search={search}/>
-        </div>
-    )
-}
+  return (
+    <div className="coursesPage">
+      <CourseList />
+    </div>
+  );
+};
 
-export default Courses
+export default Courses;

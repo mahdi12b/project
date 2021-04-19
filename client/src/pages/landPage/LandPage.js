@@ -3,17 +3,11 @@ import "./LandPage.css";
 const Landpage = () => {
   return (
     <div className="b">
-      <div className="landing">
-        <div className="intro-text">
-          <h1>Hello There</h1>
-          <p>We are Connecti 9raya &amp; Education platform</p>
-        </div>
-      </div>
+      <div className="landing"></div>
       {/**/}
       <div className="features">
         <div className="container">
           <div className="feat">
-            <i className="fas fa-magic fa-3x" />
             <h3>Tell Us Your Idea</h3>
             <p>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
@@ -48,7 +42,7 @@ const Landpage = () => {
               {/* Start Service */}
               <div className="srv">
                 {/*<i className="fas fa-palette fa-2x" />  <i className="fas fa-calculator-alt" />*/}
-                <i class="fas fa-calculator" />
+                <i className="fas fa-calculator" />
                 <div className="text">
                   <h3>Mathematique</h3>
                   <p>

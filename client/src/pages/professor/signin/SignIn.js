@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { login, videErrors } from "../../../JS/actions/professor";
-import Errors from "../../../Components/Errors";
 import { Link } from "react-router-dom";
-import './SignIn.css'
+import "./SignIn.css";
+import { Button } from "antd";
 
 const SignIn = ({ history }) => {
   const [professor, setProfessor] = useState({});
-  console.log(history)
+  console.log(history);
 
   const dispatch = useDispatch();
   const errors = useSelector((state) => state.professorReducer);
@@ -22,7 +22,58 @@ const SignIn = ({ history }) => {
   }, []);
 
   return (
-    <div className="container-fluid px-1 px-md-5 px-lg-1 px-xl-5 py-5 mx-auto">
+    <div>
+      <div className="bg-img">
+        <div className="content">
+          <header>Login Form</header>
+          <form action="#">
+            <div className="field">
+              <span className="fa fa-user" />
+              <input
+                className="mb-4"
+                type="text"
+                name="email"
+                onChange={handleChange}
+                placeholder="Enter a valid email address"
+              />{" "}
+            </div>
+            <div className="field space">
+              <span className="fa fa-lock" />
+              <input
+                type="password"
+                name="password"
+                onChange={handleChange}
+                placeholder="Enter password"
+              />{" "}
+              <span className="show">SHOW</span>
+            </div>
+            <Button
+              style={{ marginTop: 30, marginBottom: 15 }}
+              type="submit"
+              className="btn btn-blue text-center primary btnsign"
+              onClick={(e) => {
+                e.preventDefault();
+                dispatch(login(professor, history));
+              }}
+            >
+              {" "}
+              SignIn
+            </Button>
+          </form>
+
+          <div className="signup">
+            Don't have account?
+            <Link to="/professor/signup">Register</Link>{" "}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default SignIn;
+/*
+<div className="container-fluid px-1 px-md-5 px-lg-1 px-xl-5 py-5 mx-auto">
     <div className="card card0 border-0">
       <div className="row d-flex">
         <div className="col-lg-6">
@@ -100,77 +151,10 @@ const SignIn = ({ history }) => {
       </div>
     </div>
     </div>
-    
-  );
-};
 
-export default SignIn;
-/*
-<div>
-      <div className="bg-img">
-        <div className="content">
-          <header>Login Form</header>
-          <form action="#">
-            <div className="field">
-              <span className="fa fa-user" />
-              <input
-                  className="mb-4"
-                  type="text"
-                  name="email"
-                  onChange={handleChange}
-                  placeholder="Enter a valid email address"
-                />{" "}
-            </div>
 
-            <div className="field space">
-              <span className="fa fa-lock" />
-              <input
-                  type="password"
-                  name="password"
-                  onChange={handleChange}
-                  placeholder="Enter password"
-                />{" "}
-              <span className="show">SHOW</span>
-            </div>
-          
-         
-            <button
-            type="submit"
-            className="btn btn-blue text-center primary"
-            onClick={() => dispatch(login(professor, history))}
-          >
-            SignIn
-          </button>{" "}
-            
-          </form>
-          <div className="login">Or login with</div>
-          <div className="links">
-            <div className="facebook">
-              <i className="fab fa-facebook-f">
-                <span>Facebook</span>
-              </i>
-            </div>
-            <div className="instagram">
-              <i className="fab fa-instagram">
-                <span>Instagram</span>
-              </i>
-            </div>
-          </div>
-          <div className="signup">
-            Don't have account?
-            <a className="text-danger ">
-              <Link to="/professor/signup">Register</Link>{" "}
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
   
+
+
+
 */
-
-
-
-
-
-
-

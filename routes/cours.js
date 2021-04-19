@@ -1,20 +1,18 @@
-const express = require('express')
+const express = require("express");
 
 // require Router
-const courseRouter = express.Router()
+const courseRouter = express.Router();
 
-
-const isAuthProf = require('../middlewares/professorMiddleware/auth_jwt')
-
-
-
-
+const isAuthProf = require("../middlewares/professorMiddleware/auth_jwt");
 
 // require controllers
-const { postCourse , getAllCourses , getCourse , deleteCourse , editCourse } = require('../controllers/coursControllers/cours')
-
-
-
+const {
+  postCourse,
+  getAllCourses,
+  getCourse,
+  deleteCourse,
+  editCourse,
+} = require("../controllers/coursControllers/cours");
 
 // ************** All routes **********************
 
@@ -30,7 +28,6 @@ const { postCourse , getAllCourses , getCourse , deleteCourse , editCourse } = r
     res.status(200).send('Hello test')
 })*/
 
-
 /**
  * @desc : add ccourse
  * @method : POST
@@ -39,9 +36,7 @@ const { postCourse , getAllCourses , getCourse , deleteCourse , editCourse } = r
  * @acess : public
  */
 
-courseRouter.post('/coursesList/add',isAuthProf, postCourse)
-
-
+courseRouter.post("/coursesList/add", isAuthProf, postCourse);
 
 /**
  * @desc : get all courses
@@ -50,18 +45,16 @@ courseRouter.post('/coursesList/add',isAuthProf, postCourse)
  * @data : no data
  * @acess : public
  */
- courseRouter.get('/coursesList', getAllCourses)
+courseRouter.get("/coursesList", getAllCourses);
 
-
-
- /**
+/**
  * @desc : get one course
  * @method : GET
  * @path : http://localhost:7000/api/courss/:_id
  * @data : req.params
  * @acess : public
  */
-courseRouter.get('/coursesList/:_id', getCourse)
+courseRouter.get("/coursesList/:_id", getCourse);
 
 /**
  * @desc : delete course
@@ -70,17 +63,30 @@ courseRouter.get('/coursesList/:_id', getCourse)
  * @data : req.params
  * @acess : public
  */
- courseRouter.delete('/coursesList/:_id', deleteCourse)
+courseRouter.delete("/coursesList/:_id", deleteCourse);
+const deleteCourse = async (req, res) => {
+  try {
+    const courseToDelete = await Course.findOneAndRemove({ _id });
+    // console.log(coursToDelete)
+    if (!courseToDelete) {
+      res.status(200).send({ msg: "Cours already deleted ..." });
+      return;
+    }
+    res.status(200).send({ msg: "Cours deleted ...", courseToDelete });
+  } catch (error) {
+    res
+      .status(400)
+      .send({ msg: "Can not delete cours with this id !!", error });
+  }
+};
 
-
-
- /** 
+/**
  * @desc : edit course
  * @method : PUT
  * @path : http://localhost:7000/api/courss/:_id
  * @data : req.params & req.body
  * @acess : public
  */
-courseRouter.put('/coursesList/edit/:_id', editCourse)
+courseRouter.put("/coursesList/edit/:_id", editCourse);
 
-module.exports = courseRouter
+module.exports = courseRouter;

@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 const { Schema, model } = mongoose;
 
 const Professor = new Schema({
+  role:{type:String,default:"professor"},
   name: {
     type: String,
     required: true,
