@@ -6,11 +6,13 @@ import {Form} from 'react-bootstrap'
 import './Search.css'
 
 
-const SearchByName = ({setSearch}) => {
+const SearchByName = ({setSearchTitle,setSearchCategory}) => {
     
     return (
         <div>
-                <Form.Control className='InputSearch' type="text" placeholder="Search"  onChange={e=>setSearch(e.target.value)} />
+                <Form.Control className='InputSearch' type="text" placeholder="7eme...Bac||Matiere"  onChange={e=>setSearchTitle(e.target.value)}  onChange={e=>setSearchCategory(e.target.value)} />
+                
+                
         </div>
     )
 }

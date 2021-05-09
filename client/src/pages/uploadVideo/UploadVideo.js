@@ -1,24 +1,34 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
-import { Typography, Button, Form, message, Input, Icon } from "antd";
-import Dropzone from "react-dropzone";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
+import { Typography, Button, Form, message, Input, Icon } from "antd";
+import Dropzone from "react-dropzone";
+import ReactNotification from "react-notifications-component"
+import {store} from "react-notifications-component"
+import 'animate.css'
+import 'react-notifications-component/dist/theme.css'
+
 
 const { Title } = Typography;
 const { TextArea } = Input;
 
 const Private = [
-  { value: 0, label: "Private" },
-  { value: 1, label: "Public" },
+  { value: 0, label: "Any" },
+  { value: 0, label: "High School" },
+  { value: 0, label: "Middle School" },
+  { value: 0, label: "Other" },
 ];
 
 const Catogory = [
-  { value: 0, label: "Film & Animation" },
-  { value: 0, label: "Autos & Vehicles" },
-  { value: 0, label: "Music" },
-  { value: 0, label: "Pets & Animals" },
-  { value: 0, label: "Sports" },
+  { value: 0, label: "Any" },
+  { value: 0, label: "7eme" },
+  { value: 0, label: "8eme" },
+  { value: 0, label: "9eme" },
+  { value: 0, label: "1ere" },
+  { value: 0, label: "2eme" },
+  { value: 0, label: "3eme" },
+  { value: 0, label: "bac" },
 ];
 
 const UploadVideo = (props) => {
@@ -55,13 +65,35 @@ const UploadVideo = (props) => {
     setCategories(event.currentTarget.value);
   };
 
+  ///////
+  const handleClickError =(title,message,type)=>{
+    store.addNotification({
+      title: title,
+      message: message,
+      type: type,
+      insert: "top",
+      container: "top-right",
+      animationIn: ["animated", "fadeIn"],
+      animationOut: ["animated", "fadeOut"],
+      dismiss: {
+        duration: 2000,
+        showIcon:true,
+      },
+      width:500,
+    });
+  }
+ 
+
+  
+
+
   //////
   const onSubmit = (event) => {
     event.preventDefault();
     console.log(professor.isAuthProfessor);
 
     if (professor.isAuthProfessor === false) {
-      return alert("Please Log in First");
+      return handleClickError('Course Is Not Added', 'Please Login First', "danger")
     }
     if (
       title === "" ||
@@ -70,7 +102,7 @@ const UploadVideo = (props) => {
       FilePath === ""
       //|| Duration === ""
     ) {
-      alert("Please first fill all the fields");
+     return handleClickError('Course Is Not Added', 'Fill All The Fields"', "danger")
     }
 
     const variables = {
@@ -80,16 +112,18 @@ const UploadVideo = (props) => {
       privacy: privacy,
       filePath: FilePath,
       category: Categories,
+      thumbnail:Thumbnail
       // duration: Duration,
     };
 
+
     axios.post("/api/video/UploadCourse", variables).then((response) => {
       if (response.data.success) {
-        alert("video Uploaded successfully");
-        props.history.push("/coursesList");
+        return handleClickError('Course Added', 'rr', "success") ,props.history.push("/coursesList")
       } else {
-        alert("Failed to upload video");
+        return handleClickError('Course Is Not Added', 'technical problem, it must be solved in a few minutes', "danger")
       }
+      
     });
   };
 
@@ -123,7 +157,10 @@ const UploadVideo = (props) => {
   };
 
   return (
+  <div>
+     <ReactNotification/>
     <div style={{ maxWidth: "700px", margin: "2rem auto" }}>
+
       <div style={{ textAlign: "center", marginBottom: "2rem" }}>
         <Title level={2}> Upload Video</Title>
       </div>
@@ -194,9 +231,10 @@ const UploadVideo = (props) => {
         <br />
 
         <Button type="primary" size="large" onClick={onSubmit}>
-          Submit
+         submit 
         </Button>
       </Form>
+    </div>
     </div>
   );
 };

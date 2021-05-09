@@ -31,8 +31,8 @@ const SideVideo = () => {
         <div style={{ width: "40%", marginRight: "1rem" }}>
           <Link to={`/video/${video._id}`} style={{ color: "gray" }}>
             <img
-              style={{ width: "100%" }}
-              src={`http://localhost:5000/${video.thumbnail}`}
+              src={`http://localhost:4000/${video.thumbnail}`}
+              alt="hahah" 
             />
           </Link>
         </div>

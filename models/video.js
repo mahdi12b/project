@@ -31,6 +31,9 @@ const CoursSchema = new Schema(
     duration: {
       type: String,
     },
+    thumbnail:{
+      type:String,
+    }
   },
   { timestamps: true }
 );

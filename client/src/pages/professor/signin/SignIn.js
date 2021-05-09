@@ -47,10 +47,10 @@ const SignIn = ({ history }) => {
               />{" "}
               <span className="show">SHOW</span>
             </div>
-            <Button
+            <button
               style={{ marginTop: 30, marginBottom: 15 }}
               type="submit"
-              className="btn btn-blue text-center primary btnsign"
+              className="btn0 btn1 "
               onClick={(e) => {
                 e.preventDefault();
                 dispatch(login(professor, history));
@@ -58,7 +58,7 @@ const SignIn = ({ history }) => {
             >
               {" "}
               SignIn
-            </Button>
+            </button>
           </form>
 
           <div className="signup">

@@ -24,7 +24,7 @@ import { ic_subscriptions } from "react-icons-kit/md/ic_subscriptions";
 
 const NavBarr = () => {
   return (
-    <SideNav style={{ height: "100vh", position: "fixed", opacity: 0.9 }}>
+    <SideNav style={{ height: "100vh", position: "fixed" }}>
       <SideNav.Toggle />
       <SideNav.Nav style={{ opacity: 1 }} defaultSelected="home">
         <NavItem eventKey="home">
