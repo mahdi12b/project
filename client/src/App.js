@@ -22,7 +22,7 @@ import PrivateRoute from "./router/PrivateRoute";
 import Errors from "./pages/errors/Errors";
 import { currentStudent } from "./JS/actions/student";
 import { currentProfessor } from "./JS/actions/professor";
-
+import UsersManagment from"./pages/usersManagment/UsersManagment"
 import "./App.css";
 import "antd/dist/antd.css";
 
@@ -30,7 +30,8 @@ function App() {
   const dispatch = useDispatch();
 
   const history = useHistory();
-  const student = useSelector((state) => state.studentReducer);
+  const professor = useSelector((state) => state.professorReducer);
+
 
   useEffect(() => {
     if (localStorage.getItem("token")) {
@@ -73,6 +74,11 @@ function App() {
             path="/favouriteCourses"
             component={FavouriteCourses}
           />
+          
+          <PrivateRoute
+        exact
+      path='/users'
+    component={UsersManagment}/>
 
           <Route path="/*" component={Errors} />
         </Switch>

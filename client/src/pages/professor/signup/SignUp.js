@@ -71,6 +71,18 @@ const SignUp = ({ history }) => {
               />
               <span className="show">SHOW</span>
             </div>
+            <div className="field space">
+              <div className="field">
+                <span className="fa fa-user" />
+                <input
+                  className="mb-4"
+                  type="text"
+                  name="adminCode"
+                  onChange={handleChange}
+                  placeholder="Enter your secret code"
+                />
+              </div>
+            </div>
             <div className="pass">
               <a href="#">Forgot Password?</a>
             </div>

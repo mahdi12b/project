@@ -1,7 +1,10 @@
-import React, { useSelector } from "react";
+//  student Login todkhel ema fiha mochkel a voir 
+import React from "react";
 import { Route, Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch,useSelector } from "react-redux";
 import { logout } from "../../JS/actions/student";
+import {logoutProf} from "../../JS/actions/professor"
+
 
 import SideNav, {
   Toggle,
@@ -16,13 +19,17 @@ import { Icon } from "react-icons-kit";
 import { unlock } from "react-icons-kit/ikons/unlock";
 import { mail } from "react-icons-kit/ikons/mail";
 import { ic_stars } from "react-icons-kit/md/ic_stars";
-import { ic_lock } from "react-icons-kit/md/ic_lock";
+import {ic_subdirectory_arrow_left} from 'react-icons-kit/md/ic_subdirectory_arrow_left'
 
 import { ic_library_add } from "react-icons-kit/md/ic_library_add";
 
 import { ic_subscriptions } from "react-icons-kit/md/ic_subscriptions";
 
 const NavBarr = () => {
+
+  const dispatch = useDispatch();
+  const professor = useSelector((state) => state.professorReducer);
+  const student = useSelector((state) => state.studentReducer); 
   return (
     <SideNav style={{ height: "100vh", position: "fixed" }}>
       <SideNav.Toggle />
@@ -79,10 +86,30 @@ const NavBarr = () => {
           </NavIcon>
           <NavText>contact us </NavText>
         </NavItem>
-
+{(professor&&professor.isAuthProfessor)?
+ <NavItem eventKey="home">
+ <NavIcon>
+   <Link to="/" onClick={() => dispatch(logoutProf())}>
+   <Icon size={25} icon={ic_subdirectory_arrow_left} style={{ fontSize: "1.75em" }} />
+   </Link>
+ </NavIcon>
+ <NavText>Logout</NavText>
+</NavItem>
+:
+student&&student.isAuthStudent?
+<NavItem eventKey="home">
+ <NavIcon>
+   <Link to="/" onClick={() => dispatch(logout())}>
+   <Icon size={25} icon={ic_subdirectory_arrow_left} style={{ fontSize: "1.75em" }} />
+   </Link>
+ </NavIcon>
+ <NavText>Logout</NavText>
+</NavItem>
+:
         <NavItem eventKey="logim-logout">
           <NavIcon>
             <Icon size={25} icon={unlock} style={{ fontSize: "1.75em" }} />
+            
           </NavIcon>
           <NavText>SignIn</NavText>
           <NavItem eventKey="Signinprof">
@@ -106,6 +133,7 @@ const NavBarr = () => {
             </NavText>
           </NavItem>
         </NavItem>
+}
       </SideNav.Nav>
     </SideNav>
   );
@@ -157,4 +185,7 @@ export default NavBarr;
               </NavText>
             </NavItem>
           </NavItem>
+            
+            
+          {professor&&professor.isAuthProfessor?
         )}*/

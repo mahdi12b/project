@@ -104,19 +104,20 @@ exports.signin = async (req,res)=>{
 
 
 
-exports.getAllStudent= async (req, res) => {
-  try{
-    const listStudent = await Student.find()
-    res.status(200).send({msg:'getting student list succ', listStudent})
+
+// retrieve and return all users/ retrive and return a single user
+exports.find = (req, res)=>{
+
+
+      Student.find()
+          .then(user => {
+              res.send(user)
+          })
+          .catch(err => {
+              res.status(500).send({ message : err.message || "Error Occurred while retriving user information" })
+          })
   }
-  catch(error){
-    res.status(400).send({msg:`cannot find list of student ${error}`})
-  }
-}
 
-
-
-
-
+  
 
 

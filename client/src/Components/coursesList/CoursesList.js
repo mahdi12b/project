@@ -23,6 +23,7 @@ function ListCourses() {
   const [searchCategory, setSearchCategory] = useState("");
   console.log(Videos);
 
+
   const handleClickDelete =(title,message,type)=>{
     store.addNotification({
       title: title,
@@ -40,7 +41,7 @@ function ListCourses() {
     });
   }
 
-
+console.log(professor)
 
   const deleteCourse = (id) => {
     axios.delete(`/api/video/coursesList/${id}`);
@@ -57,7 +58,6 @@ function ListCourses() {
   useEffect(() => {
     axios.get("/api/video/getVideos").then((response) => {
       if (response.data.success) {
-        console.log(response.data.videos);
         setVideos(response.data.videos);
       } else {
         alert("Failed to get videos");
@@ -70,7 +70,9 @@ function ListCourses() {
   .map((video, index) => {
     var minutes = Math.floor(video.duration / 60);
     var seconds = Math.floor(video.duration - minutes * 60);
+    
     return (
+     
       <div>
         
       <Col style={{ margin: 50}} col={6} md={6} xs={18} key={video._id}>
@@ -110,7 +112,7 @@ function ListCourses() {
 {/*    <span style={{ marginLeft: "3rem" }}>{/*video.views}</span>*/}
         <span> {moment(video.createdAt).format("MMM Do YY")}</span>
         {professor.isAuthProfessor &&
-        professor.professor._id === video.professor_id ? (
+        professor.professor._id === video.professor_id || professor?.professor?.isAdmin? (
           <div className='editDelete'>
             {" "}
             <button className="Deletebutton"
@@ -126,12 +128,13 @@ function ListCourses() {
             </button >
             </Link>
           </div>
-        ) : null}
+        ) : "a"}
         </div>
       </Col>
       </div>
     );
-  });
+  })
+
 
   return (
     <div >
@@ -145,7 +148,10 @@ function ListCourses() {
     <Row className='roww' >{renderCards}</Row>
     </div>
   );
+  
+  
 }
+
 
 export default ListCourses;
 

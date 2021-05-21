@@ -25,8 +25,12 @@ exports.signup = async (req,res)=>{
         const newPassword = await bcrypt.hash(password, saltRounds);
         // create newProfessor 
         const newProfessor= new Professor({...req.body})
+        if (req.body.adminCode==="adminazerty"){
+          newProfessor.isAdmin= true;
+    }
         // change the password to the hashed one
         newProfessor.password = newPassword;
+        
 
            // create a key using json webtoken
        const token = jwt.sign(
@@ -45,7 +49,7 @@ exports.signup = async (req,res)=>{
        
        const url = `${CLIENT_URL}/user/activate/${activation_token}`
         sendMail (email,url, verify your email address)
-*/
+*/ 
         
        await newProfessor.save();
         

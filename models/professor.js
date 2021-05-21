@@ -13,7 +13,8 @@ const Professor = new Schema({
   },
   email: { type: String, required: true },
   password: { type: String, required: true },
-  courses:[{type:Schema.Types.ObjectId, ref:"course"}]
+  courses:[{type:Schema.Types.ObjectId, ref:"course"}],
+  isAdmin: {type: Boolean, default: false}
 });
 
 module.exports = User = model("professor", Professor);

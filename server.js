@@ -23,6 +23,10 @@ app.use("/api/comment", require("./routes/comment"));
 
 const PORT = process.env.PORT;
 
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static('client/build'));
+}
+
 app.listen(PORT, (err) =>
   err ? console.error(err) : console.log("server is running")
 );
